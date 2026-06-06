@@ -6,21 +6,11 @@ Resources:
   MySecurityGroup:
     Type: AWS::EC2::SecurityGroup
     Properties:
-      GroupDescription: Permite SSH, HTTP y HTTPS desde cualquier lugar
+      GroupDescription: Permite acceso desde Anywhere-IPv4
       SecurityGroupIngress:
         - IpProtocol: tcp
-          FromPort: 22
-          ToPort: 22
-          CidrIp: 0.0.0.0/0
-
-        - IpProtocol: tcp
-          FromPort: 80
-          ToPort: 80
-          CidrIp: 0.0.0.0/0
-
-        - IpProtocol: tcp
-          FromPort: 443
-          ToPort: 443
+          FromPort: 0
+          ToPort: 65535
           CidrIp: 0.0.0.0/0
 
   MyEC2:
@@ -38,6 +28,5 @@ Resources:
           Value: EC2-GitHubActions
 
 Outputs:
-
   InstanceId:
     Value: !Ref MyEC2
