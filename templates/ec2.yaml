@@ -30,9 +30,9 @@ Resources:
           #!/bin/bash
           yum update -y
           yum install -y httpd
-          systemctl enable httpd
           systemctl start httpd
-          echo "<h1>Hola desde EC2 creada por GitHub Actions</h1>" > /var/www/html/index.html
+          systemctl enable httpd
+          echo "<h1>Hello World from $(hostname -f)</h1>" > /var/www/html/index.html
 
       Tags:
         - Key: Name
