@@ -8,9 +8,7 @@ Resources:
     Properties:
       GroupDescription: Permite acceso desde Anywhere-IPv4
       SecurityGroupIngress:
-        - IpProtocol: tcp
-          FromPort: 0
-          ToPort: 65535
+        - IpProtocol: -1
           CidrIp: 0.0.0.0/0
 
   MyEC2:
