@@ -1,0 +1,43 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Description: EC2 creada desde GitHub Actions
+
+Resources:
+
+  MySecurityGroup:
+    Type: AWS::EC2::SecurityGroup
+    Properties:
+      GroupDescription: Permite SSH, HTTP y HTTPS desde cualquier lugar
+      SecurityGroupIngress:
+        - IpProtocol: tcp
+          FromPort: 22
+          ToPort: 22
+          CidrIp: 0.0.0.0/0
+
+        - IpProtocol: tcp
+          FromPort: 80
+          ToPort: 80
+          CidrIp: 0.0.0.0/0
+
+        - IpProtocol: tcp
+          FromPort: 443
+          ToPort: 443
+          CidrIp: 0.0.0.0/0
+
+  MyEC2:
+    Type: AWS::EC2::Instance
+    Properties:
+      AvailabilityZone: us-east-1a
+      ImageId: ami-0cca150d127c2216f
+      InstanceType: t3.micro
+
+      SecurityGroupIds:
+        - !Ref MySecurityGroup
+
+      Tags:
+        - Key: Name
+          Value: EC2-GitHubActions
+
+Outputs:
+
+  InstanceId:
+    Value: !Ref MyEC2
